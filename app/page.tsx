@@ -19,6 +19,7 @@ export default function Home() {
       <Hero />
       <Highlights />
       <Testimonials />
+      <br />
       <About />
       <Footer />
     </div>

@@ -6,7 +6,7 @@ const ConfirmationBooking = () => {
   return (
     <>
       <Navigation />
-      <div className="text-5xl text-black text-center w-[100vw]">
+      <div className="text-5xl text-black text-center w-[100vw] h-[80vh]">
         Booking Confrimed!
       </div>
       <Footer />

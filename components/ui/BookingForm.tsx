@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import Script from "next/script";
 import { seededRandom, fetchAPI, submitAPI } from "@/api/api";
 
@@ -35,6 +35,8 @@ const BookingForm: React.FC<BookingFormProps> = ({
     occasion: "Birthday",
   });
 
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -59,6 +61,26 @@ const BookingForm: React.FC<BookingFormProps> = ({
     // Call the submitForm function passed via props
     submitForm(formData);
   };
+
+  const isValidDate = (dateString: string) => {
+    // const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+    const today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    console.log("the date", today);
+
+    return dateString >= today;
+  };
+
+  // Check if the form is valid
+  useEffect(() => {
+    const { resDate, resTime, guests, occasion } = formData;
+    console.log("the res date", resDate);
+    if (resDate && resTime && guests > 0 && occasion && isValidDate(resDate)) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [formData]);
 
   const stylingBorder = {
     padding: "10px",
@@ -96,6 +118,7 @@ const BookingForm: React.FC<BookingFormProps> = ({
           onChange={handleChange}
           required
           style={stylingBorder}
+          min={new Date().toISOString().split("T")[0]} // Disable past dates
         />
 
         <label htmlFor="res-time">Choose time</label>
@@ -145,10 +168,14 @@ const BookingForm: React.FC<BookingFormProps> = ({
         <input
           type="submit"
           value="Make Your reservation"
+          disabled={!isFormValid}
+          aria-label="On Click"
           style={{
             ...stylingBorder,
-            backgroundColor: "#F4CE14",
+
             borderRadius: 20,
+            backgroundColor: isFormValid ? "#F4CE14" : "#ccc",
+            cursor: isFormValid ? "pointer" : "not-allowed",
           }}
         />
       </form>
