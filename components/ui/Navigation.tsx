@@ -17,19 +17,19 @@ const Navigation: React.FC = () => {
           <Link href="/" className="hover:text-yellow-500">
             Home
           </Link>
-          <Link href="/about" className="hover:text-yellow-500">
+          <Link href="#about" className="hover:text-yellow-500">
             About
           </Link>
-          <Link href="/menu" className="hover:text-yellow-500">
+          <Link href="#menu" className="hover:text-yellow-500">
             Menu
           </Link>
-          <Link href="/reservations" className="hover:text-yellow-500">
+          <Link href="/booking" className="hover:text-yellow-500">
             Reservations
           </Link>
-          <Link href="/order" className="hover:text-yellow-500">
+          <Link href="#order" className="hover:text-yellow-500">
             Order Online
           </Link>
-          <Link href="/login" className="hover:text-yellow-500">
+          <Link href="#login" className="hover:text-yellow-500">
             Login
           </Link>
         </div>

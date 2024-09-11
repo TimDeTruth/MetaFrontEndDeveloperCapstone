@@ -1,0 +1,117 @@
+import React, { useState, FormEvent } from "react";
+
+const BookingForm: React.FC = () => {
+  const [formData, setFormData] = useState({
+    resDate: "",
+    resTime: "17:00",
+    guests: 1,
+    occasion: "Birthday",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    // Here you would typically send the data to an API or perform other actions
+  };
+
+  const stylingBorder = {
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    width: "100%",
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        display: "grid",
+        maxWidth: "250px",
+        gap: "25px",
+        border: "1px solid #000",
+        padding: "20px",
+        borderRadius: "5px",
+      }}
+    >
+      <label htmlFor="res-date" className="underline">
+        Choose date
+      </label>
+      <input
+        type="date"
+        id="res-date"
+        name="resDate"
+        value={formData.resDate}
+        onChange={handleChange}
+        style={stylingBorder}
+      />
+
+      <label htmlFor="res-time" className="underline">
+        Choose time
+      </label>
+      <select
+        id="res-time"
+        name="resTime"
+        value={formData.resTime}
+        onChange={handleChange}
+      >
+        <option>17:00</option>
+        <option>18:00</option>
+        <option>19:00</option>
+        <option>20:00</option>
+        <option>21:00</option>
+        <option>22:00</option>
+      </select>
+
+      <label htmlFor="guests" className="underline">
+        Number of guests
+      </label>
+      <input
+        type="number"
+        placeholder="1"
+        min="1"
+        max="10"
+        id="guests"
+        name="guests"
+        value={formData.guests}
+        onChange={handleChange}
+        style={stylingBorder}
+      />
+
+      <label htmlFor="occasion" className="underline">
+        Occasion
+      </label>
+      <select
+        id="occasion"
+        name="occasion"
+        value={formData.occasion}
+        onChange={handleChange}
+        style={stylingBorder}
+      >
+        <option>Birthday</option>
+        <option>Anniversary</option>
+      </select>
+
+      <input
+        type="submit"
+        value="Make Your reservation"
+        style={{
+          ...stylingBorder,
+          backgroundColor: "#F4CE14",
+          borderRadius: 20,
+        }}
+      />
+    </form>
+  );
+};
+
+export default BookingForm;
