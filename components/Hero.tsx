@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Hero: React.FC = () => {
+  const router = useRouter();
   return (
     <div className="bg-green text-black">
       <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between">
@@ -12,7 +15,12 @@ const Hero: React.FC = () => {
             We are a family owned Mediterranean restaurant, focused on
             traditional recipes served with a modern twist.
           </p>
-          <button className="bg-yellow font-bold text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition duration-300">
+          <button
+            className="bg-yellow font-bold text-black px-6 py-2 rounded-full hover:bg-yellow-500 transition duration-300"
+            onClick={() => {
+              router.push("/booking");
+            }}
+          >
             Reserve a Table
           </button>
         </div>
